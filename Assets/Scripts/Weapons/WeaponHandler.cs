@@ -13,6 +13,14 @@ public class WeaponHandler : MonoBehaviour
 
     bool isFiring = false;
 
+    Vector3 aimAtVector = Vector3.right;
+
+    float turretTurnFactor = 200;
+
+    float weaponDamage = 0.01f;
+
+    bool isPlayer = false;
+
     //Other components
     ShipInputHandler shipInputHandler;
 
@@ -26,12 +34,17 @@ public class WeaponHandler : MonoBehaviour
         //Detach the laser particle system from the object it's attached to.
         laserHitParticleSystem.transform.parent = null;
 
+        if (transform.root.CompareTag("Player"))
+            isPlayer = true;
+
         shipInputHandler = GetComponentInParent<ShipInputHandler>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (!isPlayer)
+            turretTurnFactor = 20;
     }
 
     // Update is called once per frame
@@ -44,17 +57,22 @@ public class WeaponHandler : MonoBehaviour
 
         if (isFiring)
         {
-            if (Physics.SphereCast(transform.position, 3, transform.forward, out RaycastHit raycastHit, 300))
+            if (Physics.SphereCast(transform.position, 3, transform.forward, out RaycastHit raycastHit, 100))
             {
                 hitPosition = raycastHit.point;
 
                 laserHitParticleSystem.transform.position = hitPosition + transform.forward;
 
                 laserParticleSystemEmissionModule.rateOverTime = 10;
+
+                HPHandler hpHandler = raycastHit.transform.root.GetComponent<HPHandler>();
+
+                if (hpHandler != null)
+                    hpHandler.OnHit(weaponDamage);
             }
             else
             {
-                hitPosition = transform.position + transform.forward * 300;
+                hitPosition = transform.position + transform.forward * 100;
                 laserParticleSystemEmissionModule.rateOverTime = 0;
             }
 
@@ -72,10 +90,29 @@ public class WeaponHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-      
+        AimTurretAt();
     }
 
-    public void SetFiring(bool isFiring_)
+    void AimTurretAt()
+    {
+        //Desired rotation
+        Quaternion desiredRotation = Quaternion.LookRotation(new Vector3(aimAtVector.x, 0, aimAtVector.z));
+
+        //Get how far we should rotate
+        float angle = Quaternion.Angle(transform.rotation, desiredRotation);
+
+        float donePercentage = Mathf.Min(1F, turretTurnFactor * Time.deltaTime / angle);
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, donePercentage);
+ 
+    }
+
+    public void SetAimVector(Vector3 newAimVector)
+    {
+        aimAtVector = newAimVector;
+    }
+
+    public void SetIsFiring(bool isFiring_)
     {
         isFiring = isFiring_;
     }
