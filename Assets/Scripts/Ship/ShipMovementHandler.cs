@@ -53,7 +53,7 @@ public class ShipMovementHandler : MonoBehaviour
 
         //Stop the ship from rotating when the player lets go of the keys
         if (inputVector.x == 0)
-            shipRigidbody.angularDrag = 7;
+            shipRigidbody.angularDrag = 20;
         else shipRigidbody.angularDrag = 0.1f;
 
         shipRigidbody.AddTorque(new Vector3(0, inputVector.x * turnRate, 0));

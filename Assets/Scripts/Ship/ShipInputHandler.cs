@@ -7,6 +7,8 @@ public class ShipInputHandler : MonoBehaviour
 
     ShipMovementHandler shipMovementHandler;
 
+    bool isFiring = false;
+
     void Awake()
     {
         shipMovementHandler = GetComponent<ShipMovementHandler>();
@@ -28,7 +30,13 @@ public class ShipInputHandler : MonoBehaviour
 
         inputVector.x = Input.GetAxis("Horizontal");
 
-        shipMovementHandler.SetInput(inputVector);
+        isFiring = Input.GetButton("Fire1");
 
+        shipMovementHandler.SetInput(inputVector);
+    }
+
+    public bool IsFiring()
+    {
+        return isFiring;
     }
 }
