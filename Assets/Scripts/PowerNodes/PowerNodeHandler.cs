@@ -7,14 +7,25 @@ public class PowerNodeHandler : MonoBehaviour
     public bool isPowerNodeActive = false;
 
     public PowerNodeHandler nextPowerNode;
+ 
+    public Renderer powerSourceRenderer;
+
+    [Header("LeechShip")]
+    public Transform leechShip;
+    public LineRenderer leechShiplineRenderer;
 
     [Header("Materials")]
     public Material powerNodeActiveMaterial;
+    public Material powerSourceActiveMaterial;
+    public Material powerSourceDisabledMaterial;
 
     //Colors
     Color color = Color.grey;
 
     float colorDisabledDesiredAlpha = 0.25f;
+
+    //Info about Leach ship
+    bool wasLeachShipAttachedOnStart = false;
 
     LineRenderer lineRenderer;
     MaterialPropertyBlock materialPropertyBlock;
@@ -29,14 +40,18 @@ public class PowerNodeHandler : MonoBehaviour
         lineRenderer.endColor = color;
 
         color.a = 0.25f;
+
+        if (powerSourceRenderer != null)
+            powerSourceRenderer.material = powerSourceDisabledMaterial;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(PeriodicUpdates());
+        if (leechShip != null)
+            wasLeachShipAttachedOnStart = true;
 
-        Invoke("SetActive", 1.5f);
+        StartCoroutine(PeriodicUpdates());
     }
 
     // Update is called once per frame
@@ -53,11 +68,43 @@ public class PowerNodeHandler : MonoBehaviour
             lineRenderer.SetPosition(1, nextPowerNode.transform.position);
         }
         else lineRenderer.enabled = false;
+
+        if(leechShip !=null)
+        {
+            leechShiplineRenderer.SetPosition(0, transform.position);
+            leechShiplineRenderer.SetPosition(2, leechShip.transform.position);
+
+            //Set a random position for the leech line
+            Vector3 leechLinePosition = Vector3.Lerp(leechShip.transform.position, transform.position, 0.5f); //Get half way vector
+            leechLinePosition += Vector3.one * Random.Range(-5, 5);
+
+
+            leechShiplineRenderer.SetPosition(1, leechLinePosition);
+        }
+
+        //Check if the player destroyed the attached leech ship.
+        if (wasLeachShipAttachedOnStart && leechShip == null)
+        {
+            leechShiplineRenderer.enabled = false;
+            Invoke("SetActive",0.5f);
+        }
     }
 
-    void SetActive()
+    public void SetActive()
     {
         lineRenderer.material = powerNodeActiveMaterial;
+
+        if (powerSourceRenderer != null)
+            powerSourceRenderer.material = powerSourceActiveMaterial;
+
+        if (nextPowerNode != null)
+            Invoke("SetNextActive", 0.5f);
+    }
+
+    void SetNextActive()
+    {
+        if (nextPowerNode != null)
+            nextPowerNode.SetActive();
     }
 
     IEnumerator PeriodicUpdates()
