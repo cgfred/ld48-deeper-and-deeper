@@ -59,7 +59,10 @@ public class ShipInputHandler : MonoBehaviour
 
         for (int i=0;i< weaponHandlers.Length;i++)
         {
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            //Top down
+            // Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, transform.position.z -10));
 
             Vector3 aimVector = mouseWorldPosition - weaponHandlers[i].transform.position;
 

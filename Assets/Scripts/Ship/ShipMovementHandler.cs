@@ -19,6 +19,9 @@ public class ShipMovementHandler : MonoBehaviour
 
     bool isPlayer = false;
 
+    bool isLevelLoadingStarted = false;
+
+    Vector3 jumpGatePosition;
 
     //Other components
     ShipFuelHandler shipFuelHandler;
@@ -65,9 +68,12 @@ public class ShipMovementHandler : MonoBehaviour
         {
             shipRigidbody.AddForce(transform.forward * 150 * inputVector.y, ForceMode.Force);
 
-            if(isPlayer)
+            if (isPlayer)
                 shipFuelHandler.ConsumeFuel(inputVector.y * 0.001f);
+
+            shipRigidbody.drag = 0;
         }
+        else shipRigidbody.drag = 1;
 
         if (shipRigidbody.velocity.magnitude > maxSpeed)
             shipRigidbody.velocity = shipRigidbody.velocity.normalized * maxSpeed;
@@ -119,5 +125,41 @@ public class ShipMovementHandler : MonoBehaviour
     public bool IsPlayer()
     {
         return isPlayer;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("JumpGate") && isPlayer)
+        {
+            if (!isLevelLoadingStarted)
+            {
+                LevelsHandler.instance.LoadNextLevelDelayed(1.5f);
+
+                shipRigidbody.isKinematic = true;
+
+                isLevelLoadingStarted = true;
+
+                StartCoroutine(ScaleOutPlayerCO());
+
+                jumpGatePosition = other.transform.position;
+            }
+
+
+        }
+    }
+
+    //Co routines
+    IEnumerator ScaleOutPlayerCO()
+    {
+        while (true)
+        {
+
+            //Delay a little bit before telling the UI that we are done.
+            yield return new WaitForSeconds(0.01f);
+
+            transform.localScale = transform.localScale * 0.96f;
+            transform.position = Vector3.Lerp(transform.position, jumpGatePosition, Time.deltaTime*5);
+        }
+
     }
 }

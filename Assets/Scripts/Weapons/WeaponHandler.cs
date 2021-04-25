@@ -21,6 +21,8 @@ public class WeaponHandler : MonoBehaviour
 
     bool isPlayer = false;
 
+    float weaponMaxDistance = 300;
+
     //Other components
     ShipInputHandler shipInputHandler;
 
@@ -57,7 +59,7 @@ public class WeaponHandler : MonoBehaviour
 
         if (isFiring)
         {
-            if (Physics.SphereCast(transform.position, 3, transform.forward, out RaycastHit raycastHit, 100))
+            if (Physics.SphereCast(transform.position, 3, transform.forward, out RaycastHit raycastHit, weaponMaxDistance))
             {
                 hitPosition = raycastHit.point;
 
@@ -72,7 +74,7 @@ public class WeaponHandler : MonoBehaviour
             }
             else
             {
-                hitPosition = transform.position + transform.forward * 100;
+                hitPosition = transform.position + transform.forward * weaponMaxDistance;
                 laserParticleSystemEmissionModule.rateOverTime = 0;
             }
 

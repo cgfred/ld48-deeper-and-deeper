@@ -537,8 +537,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 20
-      minScalar: 10
+      scalar: 40
+      minScalar: 30
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1028,7 +1028,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 5
     angle: 45
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -5401,6 +5401,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 28fda64a723b26c448a12f77ba3d676e, type: 2}
+    - target: {fileID: 8281380483836593365, guid: 213c4cb2b9759cd40a35e466468c2d29,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
+      value: 0.98194605
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281380483836593365, guid: 213c4cb2b9759cd40a35e466468c2d29,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.0169487
+      objectReference: {fileID: 0}
     - target: {fileID: 8281380483836593367, guid: 213c4cb2b9759cd40a35e466468c2d29,
         type: 3}
       propertyPath: m_Name
@@ -5663,6 +5673,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 28fda64a723b26c448a12f77ba3d676e, type: 2}
+    - target: {fileID: 8281380483836593365, guid: 213c4cb2b9759cd40a35e466468c2d29,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
+      value: 0.98194605
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281380483836593365, guid: 213c4cb2b9759cd40a35e466468c2d29,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.0169487
+      objectReference: {fileID: 0}
     - target: {fileID: 8281380483836593367, guid: 213c4cb2b9759cd40a35e466468c2d29,
         type: 3}
       propertyPath: m_Name

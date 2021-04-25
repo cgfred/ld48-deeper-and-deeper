@@ -20,7 +20,7 @@ public class PowerNodeHandler : MonoBehaviour
     public Material powerSourceDisabledMaterial;
 
     //Colors
-    Color color = Color.grey;
+    Color color = CGUtils.HexToColor("006110");
 
     float colorDisabledDesiredAlpha = 0.25f;
 
@@ -78,9 +78,9 @@ public class PowerNodeHandler : MonoBehaviour
             Vector3 leechLinePosition = Vector3.Lerp(leechShip.transform.position, transform.position, 0.5f); //Get half way vector
             leechLinePosition += Vector3.one * Random.Range(-5, 5);
 
-
             leechShiplineRenderer.SetPosition(1, leechLinePosition);
         }
+        else leechShiplineRenderer.enabled = false;
 
         //Check if the player destroyed the attached leech ship.
         if (wasLeachShipAttachedOnStart && leechShip == null)
@@ -111,7 +111,7 @@ public class PowerNodeHandler : MonoBehaviour
     {
         while (true)
         {
-            colorDisabledDesiredAlpha = Random.Range(0.05f, 0.5f);
+            colorDisabledDesiredAlpha = Random.Range(0.8f, 1.0f);
 
             yield return new WaitForSeconds(0.5f);
         }

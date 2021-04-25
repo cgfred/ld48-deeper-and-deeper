@@ -23,11 +23,8 @@ public class ShipEngineParticleSystemHandler : MonoBehaviour
         float inputForwardCurrentFrame = shipMovementHandler.GetInputForwardAmount();
 
         if (inputForwardLastFrame == 0 && inputForwardCurrentFrame > 0)
-            particleSystemEmissionModule.rateOverTime = 100;
-        else particleSystemEmissionModule.rateOverTime = inputForwardCurrentFrame * 10;
-
-
-
+            particleSystemEmissionModule.rateOverTime = 50;
+        else particleSystemEmissionModule.rateOverTime = inputForwardCurrentFrame * 20;
 
         //Store the input value from last fram
         inputForwardLastFrame = shipMovementHandler.GetInputForwardAmount();
