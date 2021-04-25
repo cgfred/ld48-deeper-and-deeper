@@ -17,7 +17,7 @@ public class WeaponHandler : MonoBehaviour
 
     float turretTurnFactor = 200;
 
-    float weaponDamage = 0.01f;
+    float weaponDamage = 0.25f;
 
     bool isPlayer = false;
 

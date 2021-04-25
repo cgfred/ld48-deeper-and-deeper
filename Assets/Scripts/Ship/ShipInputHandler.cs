@@ -9,13 +9,24 @@ public class ShipInputHandler : MonoBehaviour
 
     WeaponHandler[] weaponHandlers;
 
+    ShipFuelHandler shipFuelHandler;
+
     bool isFiring = false;
 
     void Awake()
     {
         shipMovementHandler = GetComponent<ShipMovementHandler>();
 
+        //Only use this component on players
+        if(!shipMovementHandler.IsPlayer())
+        {
+            Destroy(this);
+            return;
+        }
+
         weaponHandlers = GetComponentsInChildren<WeaponHandler>();
+        shipFuelHandler = GetComponent<ShipFuelHandler>();
+
     }
 
     // Start is called before the first frame update
@@ -31,6 +42,10 @@ public class ShipInputHandler : MonoBehaviour
 
         inputVector.y = Input.GetAxis("Vertical");
         inputVector.y = Mathf.Clamp01(inputVector.y);
+
+        //Sorry you cannot go forward without fuel.
+        if (shipFuelHandler.IsOutOfFuel())
+            inputVector.y = 0;
 
         inputVector.x = Input.GetAxis("Horizontal");
 

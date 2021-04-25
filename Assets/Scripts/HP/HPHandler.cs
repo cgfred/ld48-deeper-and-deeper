@@ -6,7 +6,7 @@ public class HPHandler : MonoBehaviour
 {
     public GameObject shipExplosionParticleSystem;
 
-    float hp = 1.0f;
+    public float hp = 1.0f;
 
     // Start is called before the first frame update
     void Start()

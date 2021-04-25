@@ -5148,6 +5148,7 @@ GameObject:
   - component: {fileID: 7623017498698810373}
   - component: {fileID: 2055737123316553079}
   - component: {fileID: 8804384733746314535}
+  - component: {fileID: 5401050063117589104}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Player
@@ -5226,6 +5227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipExplosionParticleSystem: {fileID: 4372745154609686237}
+  hp: 20
 --- !u!114 &8804384733746314535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5239,6 +5241,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiMode: 0
+--- !u!114 &5401050063117589104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7623017498698810425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77fd279c803ac1428d4dc9d67a92467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8116743321262308490
 GameObject:
   m_ObjectHideFlags: 0
@@ -5322,6 +5336,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7623017497765483223}
     m_Modifications:
+    - target: {fileID: 7299456643519305622, guid: 213c4cb2b9759cd40a35e466468c2d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 28fda64a723b26c448a12f77ba3d676e, type: 2}
     - target: {fileID: 8281380483836593364, guid: 213c4cb2b9759cd40a35e466468c2d29,
         type: 3}
       propertyPath: m_RootOrder
@@ -5377,6 +5396,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8281380483836593365, guid: 213c4cb2b9759cd40a35e466468c2d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 28fda64a723b26c448a12f77ba3d676e, type: 2}
     - target: {fileID: 8281380483836593367, guid: 213c4cb2b9759cd40a35e466468c2d29,
         type: 3}
       propertyPath: m_Name
@@ -5574,6 +5598,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7623017497765483223}
     m_Modifications:
+    - target: {fileID: 7299456643519305622, guid: 213c4cb2b9759cd40a35e466468c2d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 28fda64a723b26c448a12f77ba3d676e, type: 2}
     - target: {fileID: 8281380483836593364, guid: 213c4cb2b9759cd40a35e466468c2d29,
         type: 3}
       propertyPath: m_RootOrder
@@ -5629,6 +5658,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8281380483836593365, guid: 213c4cb2b9759cd40a35e466468c2d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 28fda64a723b26c448a12f77ba3d676e, type: 2}
     - target: {fileID: 8281380483836593367, guid: 213c4cb2b9759cd40a35e466468c2d29,
         type: 3}
       propertyPath: m_Name

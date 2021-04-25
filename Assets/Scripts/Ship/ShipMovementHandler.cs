@@ -19,12 +19,21 @@ public class ShipMovementHandler : MonoBehaviour
 
     bool isPlayer = false;
 
+
+    //Other components
+    ShipFuelHandler shipFuelHandler;
+
     void Awake()
     {
         shipRigidbody = GetComponent<Rigidbody>();
 
         if (gameObject.CompareTag("Player"))
             isPlayer = true;
+
+        if(isPlayer)
+        {
+            shipFuelHandler = GetComponent<ShipFuelHandler>();
+        }
     }
 
     // Start is called before the first frame update
@@ -53,7 +62,12 @@ public class ShipMovementHandler : MonoBehaviour
     void MoveForward()
     {
         if (inputVector.y > 0)
+        {
             shipRigidbody.AddForce(transform.forward * 150 * inputVector.y, ForceMode.Force);
+
+            if(isPlayer)
+                shipFuelHandler.ConsumeFuel(inputVector.y * 0.001f);
+        }
 
         if (shipRigidbody.velocity.magnitude > maxSpeed)
             shipRigidbody.velocity = shipRigidbody.velocity.normalized * maxSpeed;
@@ -100,5 +114,10 @@ public class ShipMovementHandler : MonoBehaviour
     public float GetInputForwardAmount()
     {
         return inputVector.y;
+    }
+
+    public bool IsPlayer()
+    {
+        return isPlayer;
     }
 }
