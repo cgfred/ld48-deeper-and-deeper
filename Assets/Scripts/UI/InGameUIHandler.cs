@@ -80,6 +80,12 @@ public class InGameUIHandler : MonoBehaviour
 
                 fuelIndicatorImage.transform.localScale = fuelIndicatorScale;
 
+                //Kill the player if they run out of fuel
+                if(currentFuelLevel <= 0)
+                {
+                    hpHandler.OnHit(1000);
+                }
+
             }
 
             if (shipInputHandler != null)

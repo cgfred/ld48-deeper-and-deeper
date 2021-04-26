@@ -9,7 +9,7 @@ public class LevelsHandler : MonoBehaviour
     public static LevelsHandler instance = null;
 
     //Local variables
-    string[] sceneNames = {"Tutorial", "Missiles First Encounter", "Missiles Ambush" };
+    string[] sceneNames = {"Tutorial", "Missiles First Encounter", "Missiles Ambush", "FinalBoss", "Outro" };
     int currentLevelIndex = 0;
 
     private void Awake()
@@ -37,6 +37,13 @@ public class LevelsHandler : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadFirstLevel()
+    {
+        currentLevelIndex = 0;
+
+        SceneManager.LoadScene(sceneNames[currentLevelIndex]);
     }
 
     public void LoadNextLevel()

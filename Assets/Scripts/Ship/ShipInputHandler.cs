@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShipInputHandler : MonoBehaviour
 {
+    public AudioSource laserAudioSource;
+    public AudioSource laserOverHeatAudioSource;
 
     ShipMovementHandler shipMovementHandler;
 
@@ -29,6 +31,7 @@ public class ShipInputHandler : MonoBehaviour
         weaponHandlers = GetComponentsInChildren<WeaponHandler>();
         shipFuelHandler = GetComponent<ShipFuelHandler>();
 
+        laserAudioSource.volume = 0;
     }
 
     // Start is called before the first frame update
@@ -76,13 +79,24 @@ public class ShipInputHandler : MonoBehaviour
             weaponHandlers[i].SetAimVector(aimVector);
 
         }
+
+        
+
+        if(IsFiring())
+            laserAudioSource.volume = Mathf.Lerp(laserAudioSource.volume, 1.0f, Time.deltaTime*15);
+        else laserAudioSource.volume = Mathf.Lerp(laserAudioSource.volume, 0, Time.deltaTime*10);
     }
 
     public bool IsFiring()
     {
         //Over Heated
         if (heatLevel >= 0.92f)
+        {
+            if (!laserOverHeatAudioSource.isPlaying)
+                laserOverHeatAudioSource.Play();
+
             return false;
+        }
 
         return isFiring;
     }

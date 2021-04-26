@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShipMovementHandler : MonoBehaviour
 {
+    public AudioSource shipEngineAudioSource;
     public GameObject modelObject;
 
     Rigidbody shipRigidbody;
@@ -69,8 +70,14 @@ public class ShipMovementHandler : MonoBehaviour
                 shipFuelHandler.ConsumeFuel(inputVector.y * 0.001f);
 
             shipRigidbody.drag = 0;
+
+            shipEngineAudioSource.volume = Mathf.Lerp(shipEngineAudioSource.volume, 1.0f, Time.deltaTime * 2);
         }
-        else shipRigidbody.drag = 1;
+        else
+        {
+            shipRigidbody.drag = 1;
+            shipEngineAudioSource.volume = Mathf.Lerp(shipEngineAudioSource.volume, 0.2f, Time.deltaTime * 2);
+        }
 
         if (shipRigidbody.velocity.magnitude > maxSpeed)
             shipRigidbody.velocity = shipRigidbody.velocity.normalized * maxSpeed;

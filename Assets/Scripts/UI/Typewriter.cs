@@ -7,7 +7,7 @@ using TMPro;
 public class Typewriter : MonoBehaviour
 {
     public TextMeshProUGUI dialogTextMesh;
-    public AudioSource textAppearAudioSource;
+    AudioSource textAppearAudioSource;
 
     //Local variables
     string dialogText;
@@ -19,6 +19,7 @@ public class Typewriter : MonoBehaviour
 
     void Awake()
     {
+        textAppearAudioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update

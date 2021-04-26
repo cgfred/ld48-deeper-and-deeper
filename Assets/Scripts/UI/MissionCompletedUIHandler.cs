@@ -30,10 +30,13 @@ public class MissionCompletedUIHandler : MonoBehaviour
         string dialogText = "Set some dialog";
 
         if (SceneManager.GetActiveScene().name.Contains("Missiles First Encounter"))
-            dialogText = "Those Voxeltron back stabbers! Why are they attacking us? We are supposed to be allied. Commander,  return to the jump gate we need to go deeper into space to figure out what the heck is going on.";
+            dialogText = "Those UNET back stabbers! Why are they attacking us? We are supposed to be allied. Commander,  return to the jump gate we need to go deeper into space to figure out what the heck is going on.";
 
         if (SceneManager.GetActiveScene().name.Contains("Missiles Ambush"))
-            dialogText = "Voxeltron scum ambushed us! I've had it with this! Return to the jump gate, we're heading into deep space and the home of Voxeltron. ";
+            dialogText = "UNET scum ambushed us! I've had it with this! Return to the jump gate, we're heading into deep space and the home of UNET. ";
+
+        if (SceneManager.GetActiveScene().name.Contains("FinalBoss"))
+            dialogText = "You defeated the UNET! Now you can finally go back and enjoy life in Unity. Return to the jump gate.";
 
 
         characterDialogGameObject.gameObject.SetActive(true);

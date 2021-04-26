@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 7915c48c552d4e445b9550ef16f3a4c4
+  - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 32557f0b6db7d114aa18c7ee372f89ba
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
@@ -17,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Missiles Ambush.unity
     guid: 7fabbec7bf6b34c4d9c8072644bbeb1e
+  - enabled: 1
+    path: Assets/Scenes/FinalBoss.unity
+    guid: 016a4f4affa681540ba4a84bafbb5645
+  - enabled: 1
+    path: Assets/Scenes/Outro.unity
+    guid: ea6d02ac098687c4aacfdd928cbef870
   m_configObjects: {}

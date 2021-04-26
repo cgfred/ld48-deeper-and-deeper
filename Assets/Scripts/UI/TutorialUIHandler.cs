@@ -119,7 +119,7 @@ public class TutorialUIHandler : MonoBehaviour
                 break;
 
             case 1:
-                PlayText("What the heck! A Voxeltron ship is leaching from our power source. Use your mouse and shoot it down with left mouse button!");
+                PlayText("What the heck! A UNET ship is leaching from our power source. Use your mouse and shoot it down with left mouse button!");
                 break;
 
             case 2:

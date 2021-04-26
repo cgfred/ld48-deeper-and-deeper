@@ -21,10 +21,11 @@ public class MissileLauncherHandler : MonoBehaviour
 
     //Other components
     ShipInputHandler shipInputHandler;
+    MusicHandler musicHandler;
 
     void Awake()
     {
-       
+        musicHandler = Camera.main.GetComponentInChildren<MusicHandler>();
     }
 
     // Start is called before the first frame update
@@ -74,6 +75,8 @@ public class MissileLauncherHandler : MonoBehaviour
         Instantiate(missilePrefab, transform.position, Quaternion.LookRotation(aimAtVector,Vector3.up));
 
         lastTimeFired = Time.time;
+
+        musicHandler.SetLastTimeMissileFired();
 
         return true;
     }
