@@ -14,6 +14,11 @@ public class ShipAIHandler : MonoBehaviour
     Transform targetTransform = null;
 
     WeaponHandler[] weaponHandlers;
+    MissileLauncherHandler[] missileLauncherHandler;
+
+
+    float minDistanceBeforeFollowingPlayer = 600;
+    float minDistanceBeforeAttackingPlayer = 450;
 
     //Components
     ShipMovementHandler shipMovementHandler;
@@ -23,12 +28,13 @@ public class ShipAIHandler : MonoBehaviour
     {
         shipMovementHandler = GetComponent<ShipMovementHandler>();
         weaponHandlers = GetComponentsInChildren<WeaponHandler>();
+        missileLauncherHandler = GetComponentsInChildren<MissileLauncherHandler>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        targetPosition = transform.position;
     }
 
     // Update is called once per frame and is frame dependent
@@ -52,6 +58,8 @@ public class ShipAIHandler : MonoBehaviour
 
         AimAtPlayer();
 
+        FireAtPlayer();
+
         //Send the input to the car controller.
         shipMovementHandler.SetInput(inputVector);
     }
@@ -67,7 +75,10 @@ public class ShipAIHandler : MonoBehaviour
         }
 
         if (targetTransform != null)
-            targetPosition = targetTransform.position;
+        {
+            if((transform.position - targetTransform.position).magnitude < minDistanceBeforeFollowingPlayer )
+                targetPosition = targetTransform.position;
+        }
     }
 
     void FollowWaypoints()
@@ -92,6 +103,20 @@ public class ShipAIHandler : MonoBehaviour
             }
         }
         */
+    }
+
+    void FireAtPlayer()
+    {
+        if (targetTransform == null)
+            return;
+
+        if ((transform.position - targetTransform.position).magnitude > minDistanceBeforeAttackingPlayer)
+            return;
+
+        for (int i=0;i< missileLauncherHandler.Length;i++)
+        {
+            missileLauncherHandler[i].Fire();
+        }
     }
 
     void AimAtPlayer()

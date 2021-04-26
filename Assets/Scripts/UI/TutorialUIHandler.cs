@@ -24,6 +24,7 @@ public class TutorialUIHandler : MonoBehaviour
         //Only run the tutorial handler on tutorials. 
         if (!SceneManager.GetActiveScene().name.Contains("Tutorial"))
         {
+            characterDialogGameObject.SetActive(false);
             Destroy(this);
             return;
         }

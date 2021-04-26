@@ -8,10 +8,10 @@ public class ShipMovementHandler : MonoBehaviour
 
     Rigidbody shipRigidbody;
 
-    float maxTurnSpeed = 2;
-    float turnRate = 5;
+    public float maxTurnSpeed = 2;
+    public float turnRate = 5;
 
-    float maxSpeed = 75;
+    public float maxSpeed = 75;
 
     float tilt = 0;
 
@@ -44,9 +44,6 @@ public class ShipMovementHandler : MonoBehaviour
     {
         //Set our own inertiaTensor, otherwise it's set based on the colliders and causes a heap of problems with steering
         shipRigidbody.inertiaTensor = new Vector3(1, 1, 1);
-
-        if (!isPlayer)
-            maxSpeed = maxSpeed * 0.5f;
     }
 
     // Update is called once per frame

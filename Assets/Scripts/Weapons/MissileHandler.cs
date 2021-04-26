@@ -9,6 +9,14 @@ public class MissileHandler : MonoBehaviour
     float turnFactor = 70;
     float speed = 100f;
 
+    //Other components
+    HPHandler hpHandler;
+
+    void Awake()
+    {
+        hpHandler = GetComponent<HPHandler>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,8 +56,10 @@ public class MissileHandler : MonoBehaviour
             return;
 
         Vector3 aimAtVector = targetTransform.position - transform.position;
-        aimAtVector.y = 0;
+
         aimAtVector.Normalize();
+        aimAtVector.y = 0;
+     
 
         //Desired rotation
         Quaternion desiredRotation = Quaternion.LookRotation(new Vector3(aimAtVector.x, 0, aimAtVector.z));
@@ -61,5 +71,21 @@ public class MissileHandler : MonoBehaviour
 
         transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, donePercentage);
 
+    }
+
+    void OnTriggerEnter(Collider otherCollider)
+    {
+        Transform otherRootTransform = otherCollider.transform.root;
+
+        if (otherRootTransform.CompareTag("Player"))
+        {
+            otherRootTransform.GetComponent<HPHandler>().OnHit(5);
+
+          //  CGUtils.DebugLog($"Missile hit player caused damage {otherRootTransform.name}");
+        }
+       // else CGUtils.DebugLog($"Missile hit something {otherRootTransform.name}");
+
+        //destroy own missile
+        hpHandler.OnHit(1000);
     }
 }

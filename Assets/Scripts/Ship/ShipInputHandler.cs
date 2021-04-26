@@ -13,6 +13,8 @@ public class ShipInputHandler : MonoBehaviour
 
     bool isFiring = false;
 
+    float heatLevel = 0.0f;
+
     void Awake()
     {
         shipMovementHandler = GetComponent<ShipMovementHandler>();
@@ -51,6 +53,12 @@ public class ShipInputHandler : MonoBehaviour
 
         isFiring = Input.GetButton("Fire1");
 
+        if (isFiring)
+            heatLevel += Time.deltaTime * 0.3f;
+        else heatLevel -= Time.deltaTime * 0.5f;
+
+        heatLevel = Mathf.Clamp01(heatLevel);
+
         shipMovementHandler.SetInput(inputVector);
 
         Vector3 mousePosition = Input.mousePosition;
@@ -59,13 +67,10 @@ public class ShipInputHandler : MonoBehaviour
 
         for (int i=0;i< weaponHandlers.Length;i++)
         {
-            //Top down
-            // Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, transform.position.z -10));
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, transform.position.z - 10));
 
             Vector3 aimVector = mouseWorldPosition - weaponHandlers[i].transform.position;
-
             aimVector.Normalize();
 
             weaponHandlers[i].SetAimVector(aimVector);
@@ -75,6 +80,18 @@ public class ShipInputHandler : MonoBehaviour
 
     public bool IsFiring()
     {
+        //Over Heated
+        if (heatLevel >= 0.92f)
+            return false;
+
         return isFiring;
+    }
+
+
+    public float GetHeatLevel(out float max)
+    {
+        max = 1.0f;
+
+        return heatLevel;
     }
 }

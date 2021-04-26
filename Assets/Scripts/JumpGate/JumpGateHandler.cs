@@ -17,6 +17,10 @@ public class JumpGateHandler : MonoBehaviour
 
     bool isMissionCompletedHandled = false;
 
+    InGameUIHandler inGameUiHandler;
+
+    //Oter components
+
     void Awake()
     {
         planeRenderer.gameObject.SetActive(false);
@@ -24,6 +28,8 @@ public class JumpGateHandler : MonoBehaviour
         levelCompletedBoxCollider = GetComponentInChildren<BoxCollider>();
 
         levelCompletedBoxCollider.enabled = false;
+
+        inGameUiHandler=FindObjectOfType<InGameUIHandler>();
     }
 
     // Start is called before the first frame update
@@ -61,12 +67,22 @@ public class JumpGateHandler : MonoBehaviour
     {
         while (true)
         {
-            if (leachShips[0] == null)
+            int aliveCounter = 0;
+            for (int i = 0; i < leachShips.Length; i++)
+            {
+                if (leachShips[i] != null)
+                    aliveCounter++;
+            }
+
+            if (aliveCounter <= 0)
             {
                 StartCoroutine(SwapCO());
 
                 planeRenderer.gameObject.SetActive(true);
                 levelCompletedBoxCollider.enabled = true;
+
+                inGameUiHandler.OnMissionCompleted(); 
+
                 isMissionCompletedHandled = true;
 
                 break;

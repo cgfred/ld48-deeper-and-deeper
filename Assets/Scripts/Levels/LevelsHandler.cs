@@ -9,7 +9,7 @@ public class LevelsHandler : MonoBehaviour
     public static LevelsHandler instance = null;
 
     //Local variables
-    string[] sceneNames = {"Tutorial", "Tutorial" };
+    string[] sceneNames = {"Tutorial", "Missiles First Encounter", "Missiles Ambush" };
     int currentLevelIndex = 0;
 
     private void Awake()

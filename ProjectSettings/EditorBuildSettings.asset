@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 1
+    path: Assets/Scenes/Missiles First Encounter.unity
+    guid: a78c8d7429877b34f9c888b8f47fa399
+  - enabled: 1
+    path: Assets/Scenes/Missiles Ambush.unity
+    guid: 7fabbec7bf6b34c4d9c8072644bbeb1e
   m_configObjects: {}

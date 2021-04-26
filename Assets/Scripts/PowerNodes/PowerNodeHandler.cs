@@ -41,6 +41,8 @@ public class PowerNodeHandler : MonoBehaviour
 
         color.a = 0.25f;
 
+        lineRenderer.enabled = true;
+
         if (powerSourceRenderer != null)
             powerSourceRenderer.material = powerSourceDisabledMaterial;
     }

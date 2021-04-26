@@ -8,16 +8,25 @@ public class HPHandler : MonoBehaviour
 
     public float hp = 1.0f;
 
+    float maxHP;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        maxHP = hp;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public float GetHP(out float maxHP_)
+    {
+        maxHP_ = maxHP;
+
+        return hp;
     }
 
     public void OnHit(float damageAmount)
@@ -32,4 +41,6 @@ public class HPHandler : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    
 }
